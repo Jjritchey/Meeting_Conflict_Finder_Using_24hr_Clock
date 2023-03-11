@@ -27,7 +27,7 @@ int main()
 
 	
 	
-	while (meetingFile >> temp)
+	while (meetingFile >> temp)                  //taking from file and adding to vector
 	{
 		v.push_back(temp);
 	}
@@ -37,9 +37,9 @@ int main()
 	//	cout << v[i] << "\n";
 	//}
 
-	numOfMeetings = stoi(v[0]);
+	numOfMeetings = stoi(v[0]);                  //creating a int with the amount of meetings
 	
-	for (int i = 0; i < (numOfMeetings+1); i++)
+	for (int i = 0; i < (numOfMeetings+1); i++)    //loop to create vectors of the inputted data
 	{
 		temp = v[i+1].substr(0, 4);                //gathering the start time from the input file
 		int num = stoi(temp);                      //converting the start time to an int
@@ -128,14 +128,14 @@ int main()
 
 	int k = 1;
 
-	for (int i = 0; i < (numOfMeetings-1); i++)            //loop runs through every line but the last
-	{
-		for (int j = k; j < (numOfMeetings+1); j++)
-		{
-			if (startTime[i] > startTime[j] && startTime[i] < endTime[j])
-			{
-				cout << "overlap\n";
-			}
+	for (int i = 0; i < (numOfMeetings-1); i++)       //loop runs through every line but the last checking for any meeting overlaps
+	{                                                 //the loop will check if the start time of the first meeting is bigger, smaller or the same as the next start time
+		for (int j = k; j < (numOfMeetings+1); j++)   //if the first meeting start time is bigger, itll check if the it is smaller than the second meetsin end time 
+		{                                             //if it is then there is an overlap. If the first start meeting is smaller, then itll check
+			if (startTime[i] > startTime[j] && startTime[i] < endTime[j])    //if the ending time of the first meeting is bigger than the start of the second
+			{                                                                //if it is, then there is an overlap
+				cout << "overlap\n";                                         //the last check is simply if two meetings start at the same time
+			}                                                                //they will definitly overlap
 			if (startTime[i] < startTime[j] && endTime[i] > startTime[j])
 			{
 				cout << "overlap\n";
@@ -146,8 +146,8 @@ int main()
 			}
 		}
 
-		k++;
-	}
+		k++;                                               //i used value k to set the second loop so that I was not resetting the value of j each iteration
+	}                                                      //as i did not need to search values twice, which is what would happen if j kept restting to a lower value
 
 	 
 	
